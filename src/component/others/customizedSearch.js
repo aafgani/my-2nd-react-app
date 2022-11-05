@@ -40,9 +40,9 @@ export default function CustomizedInputBase({ searchHandler }) {
         <SearchIcon />
       </IconButton>
       {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-      <IconButton color="primary" sx={{ p: "10px" }} aria-label="directions">
-        <DirectionsIcon />
-      </IconButton> */}
+  <IconButton color="primary" sx={{ p: "10px" }} aria-label="directions">
+    <DirectionsIcon />
+  </IconButton> */}
     </Paper>
   );
 }

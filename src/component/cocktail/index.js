@@ -5,7 +5,10 @@ import SingleCocktail from "./singleCocktail";
 import ListCocktail from "./listCocktail";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { fetchCocktails } from "../../redux/features/cocktailSlice";
+import {
+  fetchCocktails,
+  fetchSearchCocktail,
+} from "../../redux/features/cocktailSlice";
 
 const Cocktail = () => {
   const { cocktails, loading } = useSelector((state) => ({
@@ -38,11 +41,16 @@ const Cocktail = () => {
     console.log("loading...");
   }
 
-  const searchHandler = (str) => {
-    if (str !== "") {
-      alert(str);
+  const searchHandler = (searchTxt) => {
+    if (searchTxt !== "") {
+      dispatch(fetchSearchCocktail(searchTxt));
     }
   };
+
+  if (!cocktails) {
+    return <h2>No Cocktails matched your search criteria</h2>;
+  }
+
   return (
     <>
       <Box
