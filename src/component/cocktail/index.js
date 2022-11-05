@@ -9,6 +9,7 @@ import {
   fetchCocktails,
   fetchSearchCocktail,
 } from "../../redux/features/cocktailSlice";
+import { Container } from "@mui/material";
 
 const Cocktail = () => {
   const { cocktails, loading } = useSelector((state) => ({
@@ -43,13 +44,13 @@ const Cocktail = () => {
 
   const searchHandler = (searchTxt) => {
     if (searchTxt !== "") {
-      dispatch(fetchSearchCocktail(searchTxt));
+      dispatch(fetchSearchCocktail({ searchTxt }));
     }
   };
 
-  if (!cocktails) {
-    return <h2>No Cocktails matched your search criteria</h2>;
-  }
+  // if (!cocktails) {
+  //   return <h2>No Cocktails matched your search criteria</h2>;
+  // }
 
   return (
     <>
@@ -62,9 +63,18 @@ const Cocktail = () => {
       >
         <CustomizedInputBase searchHandler={searchHandler} />
       </Box>
-      <Box>
-        <ListCocktail data={modifiedCocktail} />
-      </Box>
+      {cocktails && (
+        <Box>
+          <ListCocktail data={modifiedCocktail} />
+        </Box>
+      )}
+      {!cocktails && (
+        <>
+          <Container justifyContent="center">
+            <h2>No Cocktails matched your search criteria</h2>
+          </Container>
+        </>
+      )}
     </>
   );
 };

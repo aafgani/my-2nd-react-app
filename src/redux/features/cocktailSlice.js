@@ -27,7 +27,7 @@ export const fetchSingleCocktail = createAsyncThunk(
 
 export const fetchSearchCocktail = createAsyncThunk(
   "cocktails/fetchSearchCocktail",
-  async (searchTxt) => {
+  async ({ searchTxt }) => {
     return fetch(
       `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${searchTxt}`
     ).then((res) => res.json());
@@ -44,6 +44,7 @@ const cocktailSlice = createSlice({
     [fetchCocktails.fulfilled]: (state, action) => {
       state.loading = false;
       state.cocktails = action.payload.drinks;
+      console.log("fetch : " + state.cocktails?.length);
     },
     [fetchCocktails.rejected]: (state, action) => {
       state.loading = false;
@@ -65,11 +66,12 @@ const cocktailSlice = createSlice({
     },
     [fetchSearchCocktail.fulfilled]: (state, action) => {
       state.loading = false;
-      state.cocktail = action.payload.drinks;
+      state.cocktails = action.payload.drinks;
+      console.log("search : " + state.cocktails?.length);
     },
     [fetchSearchCocktail.rejected]: (state, action) => {
       state.loading = false;
-      state.cocktail = action.payload;
+      state.error = action.payload;
     },
   },
 });
