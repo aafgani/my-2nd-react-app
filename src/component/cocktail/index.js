@@ -45,12 +45,10 @@ const Cocktail = () => {
   const searchHandler = (searchTxt) => {
     if (searchTxt !== "") {
       dispatch(fetchSearchCocktail({ searchTxt }));
+    } else {
+      dispatch(fetchCocktails());
     }
   };
-
-  // if (!cocktails) {
-  //   return <h2>No Cocktails matched your search criteria</h2>;
-  // }
 
   return (
     <>
@@ -63,18 +61,24 @@ const Cocktail = () => {
       >
         <CustomizedInputBase searchHandler={searchHandler} />
       </Box>
-      {cocktails && (
-        <Box>
-          <ListCocktail data={modifiedCocktail} />
-        </Box>
-      )}
-      {!cocktails && (
-        <>
-          <Container justifyContent="center">
-            <h2>No Cocktails matched your search criteria</h2>
-          </Container>
-        </>
-      )}
+      <Box>
+        {loading ? (
+          <>
+            <Container justifyContent="center">
+              <h2>loading...</h2>
+            </Container>
+          </>
+        ) : (
+          <>
+            {cocktails && <ListCocktail data={modifiedCocktail} />}
+            {!cocktails && (
+              <Container justifyContent="center">
+                <h2>No Cocktails matched your search criteria</h2>
+              </Container>
+            )}
+          </>
+        )}
+      </Box>
     </>
   );
 };
