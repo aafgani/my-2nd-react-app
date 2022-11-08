@@ -7,7 +7,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import DirectionsIcon from "@mui/icons-material/Directions";
 
-export default function CustomizedInputBase({ searchHandler }) {
+export default function CustomizedInputBase({
+  searchHandler,
+  placeholder,
+  iconButton,
+}) {
   const [str, setStr] = useState("");
   const searchOnClickHandler = (e) => {
     searchHandler(str);
@@ -25,7 +29,7 @@ export default function CustomizedInputBase({ searchHandler }) {
       </IconButton>
       <InputBase
         sx={{ ml: 1, flex: 1 }}
-        placeholder="Search"
+        placeholder={placeholder}
         inputProps={{ "aria-label": "search google maps" }}
         value={str}
         onChange={txtSearchOnChange}
@@ -36,7 +40,7 @@ export default function CustomizedInputBase({ searchHandler }) {
         aria-label="search"
         onClick={searchOnClickHandler}
       >
-        <SearchIcon />
+        {iconButton ? iconButton : <SearchIcon />}
       </IconButton>
       {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
   <IconButton color="primary" sx={{ p: "10px" }} aria-label="directions">

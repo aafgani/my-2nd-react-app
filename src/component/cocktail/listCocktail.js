@@ -15,12 +15,12 @@ import { Link } from "react-router-dom";
 const ListCocktail = ({ data }) => {
   return (
     <>
-      <Grid container spacing={3}>
+      <Grid container spacing={2}>
         {data?.map((item, index) => {
           const { id, name, img, glass } = item;
           return (
             <>
-              <Grid key={index} item sm={6} md={4} lg={2}>
+              <Grid key={index} item sm={6} md={4} lg={3}>
                 <Container>
                   <Card sx={{ maxWidth: 400 }}>
                     <CardMedia

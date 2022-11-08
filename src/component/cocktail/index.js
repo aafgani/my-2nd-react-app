@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import SingleCocktail from "./singleCocktail";
 import ListCocktail from "./listCocktail";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import AddIcon from "@mui/icons-material/Add";
 import {
   fetchCocktails,
   fetchSearchCocktail,
@@ -59,26 +59,31 @@ const Cocktail = () => {
         display="flex"
         sx={{ padding: "30px" }}
       >
-        <CustomizedInputBase searchHandler={searchHandler} />
+        <CustomizedInputBase
+          searchHandler={searchHandler}
+          placeholder="Search..."
+        />
       </Box>
-      <Box>
-        {loading ? (
-          <>
-            <Container justifyContent="center">
-              <h2>loading...</h2>
-            </Container>
-          </>
-        ) : (
-          <>
-            {cocktails && <ListCocktail data={modifiedCocktail} />}
-            {!cocktails && (
-              <Container justifyContent="center">
-                <h2>No Cocktails matched your search criteria</h2>
+      <Container maxWidth="xl">
+        <Box>
+          {loading ? (
+            <>
+              <Container alignContent="center">
+                <h2>loading...</h2>
               </Container>
-            )}
-          </>
-        )}
-      </Box>
+            </>
+          ) : (
+            <>
+              {cocktails && <ListCocktail data={modifiedCocktail} />}
+              {!cocktails && (
+                <Container justifyContent="center">
+                  <h2>No Cocktails matched your search criteria</h2>
+                </Container>
+              )}
+            </>
+          )}
+        </Box>
+      </Container>
     </>
   );
 };
