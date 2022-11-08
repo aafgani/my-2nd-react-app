@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Cocktail, SingleCocktail } from "./component/cocktail";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import Todo from "./component/todo";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -17,6 +18,7 @@ root.render(
           <Route path="/" element={<App />} />
           <Route path="/cocktail" element={<Cocktail />} />
           <Route path="/cocktail/:id" element={<SingleCocktail />} />
+          <Route path="todo" element={<Todo />} />
         </Routes>
       </BrowserRouter>
     </Provider>
