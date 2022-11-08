@@ -38,10 +38,6 @@ const Cocktail = () => {
     }
   }, [cocktails]);
 
-  if (loading) {
-    console.log("loading...");
-  }
-
   const searchHandler = (searchTxt) => {
     if (searchTxt !== "") {
       dispatch(fetchSearchCocktail({ searchTxt }));
