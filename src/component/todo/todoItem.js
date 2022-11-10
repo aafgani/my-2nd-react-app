@@ -1,9 +1,8 @@
-import { Box, Checkbox } from "@mui/material";
-import React, { useState } from "react";
+import { Box, Checkbox, TextField } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CreateIcon from "@mui/icons-material/Create";
-import InputBase from "@mui/material/InputBase";
 import EditAttributesIcon from "@mui/icons-material/EditAttributes";
 import {
   useUpsertTodoMutation,
@@ -12,36 +11,38 @@ import {
 
 const TodoItem = ({ item }) => {
   const [edit, setEdit] = useState(false);
-  const [upsertTodo, { error }] = useUpsertTodoMutation();
+  const [upsertTodo] = useUpsertTodoMutation();
   const [deleteTodo] = useDeleteTodoMutation();
-  const [editedItemName, setEditedItemName] = useState("");
-  const { Id, itemName, isCompleted } = item;
+  const [formValue, setFormValue] = useState({});
 
   const HandleOnEdit = (e) => {
     setEdit(!edit);
-    setEditedItemName(e.target.value);
   };
   const HandleOnRemove = (Id) => {
     deleteTodo({ Id: Id });
   };
   const HandleOnComplete = () => {
-    upsertTodo({ Id: Id, itemName: itemName, isCompleted: !isCompleted });
+    upsertTodo({
+      Id: formValue.Id,
+      itemName: formValue.itemName,
+      isCompleted: !formValue.isCompleted,
+    });
   };
 
-  //   if (error) {
-  //     // let errorMsg = {error.status} {JSON.stringify(error.data)};
-  //     alert("eror : " + error);
-  //   }
+  useEffect(() => {
+    setFormValue({ ...item });
+  }, [item]);
+
+  const HandleItemNameOnChange = (e) => {};
 
   return (
     <Box display="flex" justifyContent="space-between">
       {edit ? (
         <Box>
-          <InputBase
-            sx={{ ml: 1, flex: 1, width: "700px" }}
-            placeholder={itemName}
-            inputProps={{ "aria-label": "search google maps" }}
-            value={editedItemName}
+          <TextField
+            variant="standard"
+            value={formValue.itemName}
+            onChange={HandleItemNameOnChange}
           />
           <IconButton
             type="button"
@@ -58,13 +59,13 @@ const TodoItem = ({ item }) => {
             <Checkbox
               checked={item.isCompleted ? true : false}
               onChange={() => {
-                HandleOnComplete(Id);
+                HandleOnComplete(formValue.Id);
               }}
             />
-            <span>{itemName}</span>
+            <span>{formValue.itemName}</span>
           </Box>
           <Box m={1} display="flex" justifyContent="flex-end">
-            {!isCompleted && (
+            {!formValue.isCompleted && (
               <>
                 <IconButton
                   aria-label="edit"
@@ -77,7 +78,7 @@ const TodoItem = ({ item }) => {
                 <IconButton
                   aria-label="delete"
                   onClick={() => {
-                    HandleOnRemove(Id);
+                    HandleOnRemove(formValue.Id);
                   }}
                 >
                   <DeleteIcon />
