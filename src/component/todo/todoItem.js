@@ -28,10 +28,10 @@ const TodoItem = ({ item }) => {
     upsertTodo({ Id: Id, itemName: itemName, isCompleted: !isCompleted });
   };
 
-  if (error) {
-    // let errorMsg = {error.status} {JSON.stringify(error.data)};
-    alert(error);
-  }
+  //   if (error) {
+  //     // let errorMsg = {error.status} {JSON.stringify(error.data)};
+  //     alert("eror : " + error);
+  //   }
 
   return (
     <Box display="flex" justifyContent="space-between">

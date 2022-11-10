@@ -15,6 +15,7 @@ export default function CustomizedInputBase({
   const [str, setStr] = useState("");
   const searchOnClickHandler = (e) => {
     searchHandler(str);
+    setStr("");
   };
   const txtSearchOnChange = (e) => {
     setStr(e.target.value);

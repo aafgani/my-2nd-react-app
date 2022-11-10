@@ -7,4 +7,6 @@ export default configureStore({
     cocktailApp: CocktailReducer,
     [todoApi.reducerPath]: todoApi.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat([todoApi.middleware]),
 });
