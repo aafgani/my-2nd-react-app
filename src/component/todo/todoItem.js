@@ -17,6 +17,7 @@ const TodoItem = ({ item }) => {
 
   const HandleOnEdit = (e) => {
     setEdit(!edit);
+    upsertTodo(formValue);
   };
   const HandleOnRemove = (Id) => {
     deleteTodo({ Id: Id });
@@ -33,7 +34,9 @@ const TodoItem = ({ item }) => {
     setFormValue({ ...item });
   }, [item]);
 
-  const HandleItemNameOnChange = (e) => {};
+  const HandleItemNameOnChange = (e) => {
+    setFormValue({ ...formValue, itemName: e.target.value });
+  };
 
   return (
     <Box display="flex" justifyContent="space-between">
@@ -41,7 +44,7 @@ const TodoItem = ({ item }) => {
         <Box>
           <TextField
             variant="standard"
-            value={formValue.itemName}
+            defaultValue={formValue.itemName}
             onChange={HandleItemNameOnChange}
           />
           <IconButton
