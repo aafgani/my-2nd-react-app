@@ -1,8 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import CocktailReducer from "./features/cocktailSlice";
 import { todoApi } from "./service/todoService";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
     cocktailApp: CocktailReducer,
     [todoApi.reducerPath]: todoApi.reducer,
@@ -10,3 +11,7 @@ export default configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([todoApi.middleware]),
 });
+
+setupListeners(store.dispatch);
+
+export default store;

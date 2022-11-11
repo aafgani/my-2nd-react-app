@@ -8,6 +8,9 @@ import {
   useFetchTodosQuery,
   useUpsertTodoMutation,
 } from "../../redux/service/todoService";
+import Stack from "@mui/material/Stack";
+import IconButton from "@mui/material/IconButton";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
 const Todo = () => {
   const {
@@ -16,6 +19,7 @@ const Todo = () => {
     isSuccess,
     isError,
     error,
+    refetch,
   } = useFetchTodosQuery();
 
   const [upsertTodo, { errorUpsert }] = useUpsertTodoMutation();
@@ -37,11 +41,21 @@ const Todo = () => {
       <Box sx={{ marginTop: "30px" }}>
         <Grid container spacing={2} justifyContent="space-around">
           <Grid item xs={6} lg={4} alignContent="center">
-            <CustomizedInputBase
-              searchHandler={HandleOnAddItem}
-              placeholder="To do ..."
-              iconButton={<AddIcon />}
-            />
+            <Stack direction="row" spacing={2}>
+              <CustomizedInputBase
+                searchHandler={HandleOnAddItem}
+                placeholder="To do ..."
+                iconButton={<AddIcon />}
+              />
+              <IconButton
+                onClick={() => {
+                  refetch();
+                }}
+              >
+                <RefreshIcon />
+              </IconButton>
+            </Stack>
+
             <br />
             {isLoading && <p>Loading...</p>}
             {isSuccess && (
