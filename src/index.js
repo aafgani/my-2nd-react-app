@@ -8,6 +8,7 @@ import { Cocktail, SingleCocktail } from "./component/cocktail";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import Todo from "./component/todo";
+import Movie from "./component/movie";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,6 +20,7 @@ root.render(
           <Route path="/cocktail" element={<Cocktail />} />
           <Route path="/cocktail/:id" element={<SingleCocktail />} />
           <Route path="todo" element={<Todo />} />
+          <Route path="movie" element={<Movie />} />
         </Routes>
       </BrowserRouter>
     </Provider>
