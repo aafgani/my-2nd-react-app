@@ -13,6 +13,7 @@ import { Cocktail } from "../cocktail";
 import CartMovie from "./cartMovie";
 import FavoriteMovie from "./favoriteMovie";
 import ListMovie from "./listMovie";
+import Badge from "@mui/material/Badge";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -25,16 +26,12 @@ function TabPanel(props) {
       aria-labelledby={`simple-tab-${index}`}
       {...other}
     >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
+      {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
   );
 }
 
-const Movie = () => {
+const Movie = ({ children }) => {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -58,7 +55,14 @@ const Movie = () => {
               aria-label="icon tabs example"
             >
               <Tab icon={<MovieIcon />} aria-label="movie" />
-              <Tab icon={<ShoppingCartIcon />} aria-label="cart" />
+              <Tab
+                icon={
+                  <Badge badgeContent={4} color="primary">
+                    <ShoppingCartIcon />
+                  </Badge>
+                }
+                aria-label="cart"
+              />
               <Tab icon={<FavoriteIcon />} aria-label="favorite" />
               <Tab icon={<PersonPinIcon />} aria-label="person" />
             </Tabs>
@@ -66,6 +70,8 @@ const Movie = () => {
           <Box>
             <TabPanel value={value} index={0}>
               <ListMovie />
+              {/* <p>123</p> */}
+              {children}
             </TabPanel>
             <TabPanel value={value} index={1}>
               <CartMovie />

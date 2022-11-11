@@ -38,7 +38,7 @@ const ListMovie = () => {
         <Box>
           {isLoading && (
             <>
-              <Container alignContent="center">
+              <Container>
                 <h2>loading...</h2>
               </Container>
             </>
@@ -59,7 +59,7 @@ const ListMovie = () => {
             </>
           )}
         </Box>
-        <Box alignContent="center" justifyContent="center" display="flex">
+        <Box justifyContent="center" display="flex">
           <Pagination
             count={data?.total_pages}
             variant="outlined"
